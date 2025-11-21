@@ -26,7 +26,22 @@ namespace ClashRoyale.Protocol.Messages.Client.Alliance
         public override async void Process()
         {
             var alliance = await Resources.Alliances.GetAllianceAsync(AllianceId);
+            var home = Device.Player.Home;
             if (alliance == null) return;
+
+            // Check if player is already in a clan
+            if (home.AllianceInfo.HasAlliance)
+            {
+                await new AllianceJoinRequestFailedMessage(Device).SendAsync();
+                return;
+            }
+
+            // Check trophy requirements
+            if (home.Arena.Trophies < alliance.RequiredScore)
+            {
+                await new AllianceJoinRequestFailedMessage(Device).SendAsync();
+                return;
+            }
 
             if (alliance.Members.Count <= 0 || alliance.Members.Count >= 50)
             {

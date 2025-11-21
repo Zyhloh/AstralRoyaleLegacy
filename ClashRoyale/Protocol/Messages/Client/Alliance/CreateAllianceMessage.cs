@@ -84,6 +84,13 @@ namespace ClashRoyale.Protocol.Messages.Client.Alliance
         public override async void Process()
         {
             var player = Device.Player;
+            
+            // Check if player is already in a clan
+            if (player.Home.AllianceInfo.HasAlliance)
+            {
+                return;
+            }
+            
             if (!player.Home.UseGold(1000)) return;
 
             var alliance = await AllianceDb.CreateAsync();
