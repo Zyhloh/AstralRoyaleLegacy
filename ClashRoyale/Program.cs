@@ -26,7 +26,7 @@ namespace ClashRoyale
         {
             Console.Clear();
 
-            Console.Title = $"AstralRoyale: V{ClashRoyale.Core.Configuration.Version} (by: @astralsc on GitHub)";
+            Console.Title = $"AstralRoyale: V{ClashRoyale.Core.Configuration.Version} (by: @Greedycell on GitHub)";
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
             string remoteUrl = "https://raw.githubusercontent.com/Greedycell/AstralRoyaleLegacy/refs/heads/master/project_update_check";
